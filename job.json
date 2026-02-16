@@ -1,0 +1,38 @@
+{
+  "name": "ci_cd_sales_pipeline",
+  "tasks": [
+    {
+      "task_key": "ingest",
+      "notebook_task": {
+        "notebook_path": "/Workspace/CI_CD_POC/ingest.py"
+      },
+      "job_cluster_key": "job_cluster"
+    },
+    {
+      "task_key": "transform",
+      "depends_on": [{"task_key": "ingest"}],
+      "notebook_task": {
+        "notebook_path": "/Workspace/CI_CD_POC/transform.py"
+      },
+      "job_cluster_key": "job_cluster"
+    },
+    {
+      "task_key": "aggregate",
+      "depends_on": [{"task_key": "transform"}],
+      "notebook_task": {
+        "notebook_path": "/Workspace/CI_CD_POC/aggregate.py"
+      },
+      "job_cluster_key": "job_cluster"
+    }
+  ],
+  "job_clusters": [
+    {
+      "job_cluster_key": "job_cluster",
+      "new_cluster": {
+        "spark_version": "13.3.x-scala2.12",
+        "node_type_id": "Standard_DS3_v2",
+        "num_workers": 1
+      }
+    }
+  ]
+}

@@ -4,7 +4,7 @@
     {
       "task_key": "ingest",
       "notebook_task": {
-        "notebook_path": "/Workspace/CI_CD_POC/ingest.py"
+        "notebook_path": "/Workspace/CI_CD_Demo/ingest.py"
       },
       "existing_cluster_id": "be3890657fc32191"
     },
@@ -12,7 +12,7 @@
       "task_key": "transform",
       "depends_on": [{"task_key": "ingest"}],
       "notebook_task": {
-        "notebook_path": "/Workspace/CI_CD_POC/transform.py"
+        "notebook_path": "/Workspace/CI_CD_Demo/transform.py"
       },
       "existing_cluster_id": "be3890657fc32191"
     },
@@ -20,7 +20,7 @@
       "task_key": "aggregate",
       "depends_on": [{"task_key": "transform"}],
       "notebook_task": {
-        "notebook_path": "/Workspace/CI_CD_POC/aggregate.py"
+        "notebook_path": "/Workspace/CI_CD_Demo/aggregate.py"
       },
       "existing_cluster_id": "be3890657fc32191"
     }

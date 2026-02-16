@@ -1,0 +1,32 @@
+name: Deploy to Databricks
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Install Databricks CLI
+        run: |
+          pip install databricks-cli
+
+      - name: Configure Databricks
+        run: |
+          echo "${{ secrets.DATABRICKS_HOST }}" > host.txt
+          echo "${{ secrets.DATABRICKS_TOKEN }}" > token.txt
+          databricks configure --token < <(echo -e "${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_TOKEN }}")
+
+      - name: Deploy Notebooks
+        run: |
+          databricks workspace import_dir notebooks /Workspace/CI_CD_Demo --overwrite
+
+      - name: Create or Update Job
+        run: |
+          databricks jobs create --json-file job.json || true

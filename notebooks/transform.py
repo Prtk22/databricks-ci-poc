@@ -6,4 +6,4 @@ clean_df = df.filter(col("amount") > 100)
 
 clean_df.write.mode("overwrite").saveAsTable("workspace.silver.demo_clean_sales")
 
-print("Transformation Complete")
+print("Transformation is Complete")

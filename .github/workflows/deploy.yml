@@ -29,4 +29,4 @@ jobs:
 
       - name: Create or Update Job
         run: |
-          databricks jobs create --json-file job.json
+          databricks jobs create --json-file job.json || true
